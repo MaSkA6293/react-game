@@ -8,7 +8,7 @@ import { ReactComponent as Minus } from "../../assets/minus.svg";
 import { ReactComponent as Divide } from "../../assets/divide.svg";
 import { ReactComponent as Multiplied } from "../../assets/multiplied.svg";
 import { ReactComponent as Cup } from "../../assets/cup.svg";
-
+import { Link } from "react-router-dom";
 export default function Main(): React.ReactElement {
   const [sign, setSign] = React.useState<string>("+");
   const [angle, setAngle] = React.useState<number>(45);
@@ -193,7 +193,9 @@ export default function Main(): React.ReactElement {
             </section>
           </section>
           <section className="main__play-game play-game">
-            <button className="play-game__start">Start game</button>
+            <Link to="/game" className="play-game__start-link">
+              <button className="play-game__start">Start game</button>
+            </Link>
           </section>
         </div>
       </div>
