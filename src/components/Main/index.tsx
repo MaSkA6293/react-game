@@ -2,6 +2,7 @@ import React from "react";
 import "./styles.scss";
 import classNames from "classnames";
 import Counter from "../Counter";
+import { useDispatch, useSelector } from "react-redux";
 import { ReactComponent as ArrowDown } from "../../assets/arrow-down.svg";
 import { ReactComponent as Plus } from "../../assets/plus.svg";
 import { ReactComponent as Minus } from "../../assets/minus.svg";
@@ -9,10 +10,13 @@ import { ReactComponent as Divide } from "../../assets/divide.svg";
 import { ReactComponent as Multiplied } from "../../assets/multiplied.svg";
 import { ReactComponent as Cup } from "../../assets/cup.svg";
 import { Link } from "react-router-dom";
+import { setSign, setCount } from "../../actionCreators";
+import { selectGameSign, selectGameCount } from "../../selectors";
 export default function Main(): React.ReactElement {
-  const [sign, setSign] = React.useState<string>("+");
   const [angle, setAngle] = React.useState<number>(45);
-  const [countDigit, setCountDigit] = React.useState<number>(1);
+  const dispatch = useDispatch();
+  const sign = useSelector(selectGameSign);
+  const count = useSelector(selectGameCount);
   const handlerChangeSign = (e: React.MouseEvent<HTMLButtonElement>) => {
     switch (e.currentTarget.value) {
       case "+":
@@ -30,7 +34,7 @@ export default function Main(): React.ReactElement {
       default:
         setAngle(45);
     }
-    setSign(e.currentTarget.value);
+    dispatch(setSign(e.currentTarget.value));
   };
   const plus = <Plus fill="black" width="100%" height="100%" />;
   const minus = <Minus fill="black" width="100%" height="100%" />;
@@ -44,26 +48,20 @@ export default function Main(): React.ReactElement {
         <div className="main__contaner">
           <section className="main__selected-status status">
             <span className="status__digit">
-              <Counter top={countDigit === 3 ? -350 : 0} reverse={true} />
+              <Counter top={count === 3 ? -350 : 0} reverse={true} />
               <Counter
                 top={
-                  countDigit === 1
-                    ? 0
-                    : countDigit === 2
-                    ? 250
-                    : countDigit === 3
-                    ? 300
-                    : 0
+                  count === 1 ? 0 : count === 2 ? 250 : count === 3 ? 300 : 0
                 }
                 reverse={false}
               />
               <Counter
                 top={
-                  countDigit === 1
+                  count === 1
                     ? -150
-                    : countDigit === 2
+                    : count === 2
                     ? -200
-                    : countDigit === 3
+                    : count === 3
                     ? -250
                     : 0
                 }
@@ -79,11 +77,11 @@ export default function Main(): React.ReactElement {
             <span className="status__digit">
               <Counter
                 top={
-                  countDigit === 1
+                  count === 1
                     ? -100
-                    : countDigit === 2
+                    : count === 2
                     ? -150
-                    : countDigit === 3
+                    : count === 3
                     ? -200
                     : 0
                 }
@@ -92,17 +90,11 @@ export default function Main(): React.ReactElement {
 
               <Counter
                 top={
-                  countDigit === 1
-                    ? 0
-                    : countDigit === 2
-                    ? 100
-                    : countDigit === 3
-                    ? 150
-                    : 0
+                  count === 1 ? 0 : count === 2 ? 100 : count === 3 ? 150 : 0
                 }
                 reverse={false}
               />
-              <Counter top={countDigit === 3 ? -100 : 0} reverse={true} />
+              <Counter top={count === 3 ? -100 : 0} reverse={true} />
             </span>
           </section>
 
@@ -163,18 +155,18 @@ export default function Main(): React.ReactElement {
               <div
                 className={classNames(
                   "number-of-digits__item",
-                  countDigit === 1 ? "number-of-digits__item-active" : ""
+                  count === 1 ? "number-of-digits__item-active" : ""
                 )}
-                onClick={() => setCountDigit(1)}
+                onClick={() => dispatch(setCount(1))}
               >
                 <div className="number-of-digits__digit">1</div>
               </div>
               <div
                 className={classNames(
                   "number-of-digits__item",
-                  countDigit === 2 ? "number-of-digits__item-active" : ""
+                  count === 2 ? "number-of-digits__item-active" : ""
                 )}
-                onClick={() => setCountDigit(2)}
+                onClick={() => dispatch(setCount(2))}
               >
                 <div className="number-of-digits__digit">2</div>
                 <div className="number-of-digits__digit">2</div>
@@ -182,9 +174,9 @@ export default function Main(): React.ReactElement {
               <div
                 className={classNames(
                   "number-of-digits__item",
-                  countDigit === 3 ? "number-of-digits__item-active" : ""
+                  count === 3 ? "number-of-digits__item-active" : ""
                 )}
-                onClick={() => setCountDigit(3)}
+                onClick={() => dispatch(setCount(3))}
               >
                 <div className="number-of-digits__digit">1</div>
                 <div className="number-of-digits__digit">2</div>
