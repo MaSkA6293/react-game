@@ -31,6 +31,7 @@ export const Footer: React.FC = (): React.ReactElement => {
           Course RS_School
         </a>
       </div>
+      <div className="footer__created">Created 2021</div>
     </div>
   );
 };

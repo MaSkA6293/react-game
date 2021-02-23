@@ -1,5 +1,61 @@
 .game{
-    background-color: #d2ced0;;
     width: 100%;
-    height: 80vh;
+    padding-bottom: 30px;
+    flex: 1;
+    
+    &__get-back{
+     position: absolute;
+     right: 8px;
+     top: 16px;
+    }
+    .current-expression{
+        display: flex;
+        justify-content: center;
+        padding: 10px 0;
+        &__block{
+            display: flex;
+            justify-content: center;
+        }
+        &__sign{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            padding: 0 10px;
+        }
+    }
+    &__contaner{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 500px;
+        margin: auto;
+        position: relative;
+    }
+    &__bord{
+        display: flex;
+        flex-wrap: wrap;
+        width: 500px;
+        margin: auto;
+    }
+    &__bord-item{
+        width: 60px;
+        height: 60px;
+        background-color: #98ee99;
+        border: 1px solid;
+        border-radius: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.8rem;
+        font-weight: bold;
+        transition: all 0.3s ease-in-out;
+    }
+    &__bord-item-activ{
+        &:hover {
+            font-size: 2rem;
+            cursor: pointer;
+            background-color: #66bb6a;
+        }
+    }
 }

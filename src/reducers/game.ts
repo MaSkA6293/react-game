@@ -4,10 +4,16 @@ import { GameActionsType } from "../constants";
 export interface IStateGame {
   sign: string;
   count: number;
+  step: number;
+  timeUp: number;
+  countTasks: number;
 }
 const initialState: IStateGame = {
   sign: "+",
   count: 1,
+  step: 1000,
+  timeUp: 10000,
+  countTasks: 1,
 };
 
 const game = (

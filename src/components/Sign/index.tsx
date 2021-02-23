@@ -7,11 +7,15 @@ import { ReactComponent as Multiplied } from "../../assets/multiplied.svg";
 import { useDispatch } from "react-redux";
 import { setSign } from "../../actionCreators";
 
-export default function Sign(): React.ReactElement {
+export default function Sign({ sign }: any): React.ReactElement {
+  React.useEffect(() => {
+    console.log(sign);
+    rotateSelector(sign);
+  }, [sign]);
   const [angle, setAngle] = React.useState<number>(45);
   const dispatch = useDispatch();
-  const handlerChangeSign = (e: React.MouseEvent<HTMLButtonElement>) => {
-    switch (e.currentTarget.value) {
+  const rotateSelector = (value: string) => {
+    switch (value) {
       case "+":
         setAngle(45);
         break;
@@ -27,6 +31,10 @@ export default function Sign(): React.ReactElement {
       default:
         setAngle(45);
     }
+  };
+  const handlerChangeSign = (e: React.MouseEvent<HTMLButtonElement>) => {
+    rotateSelector(e.currentTarget.value);
+    localStorage.setItem("sign", e.currentTarget.value);
     dispatch(setSign(e.currentTarget.value));
   };
   return (

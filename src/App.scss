@@ -2,7 +2,7 @@
 .app{
     max-width: 100%;
     min-width: 500px;
-    height: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     background: linear-gradient(0deg, #98ee99, #b8f7bb);

@@ -21,13 +21,21 @@ export default function Status({
   return (
     <section className="main__selected-status status">
       <span className="status__digit">
-        <Counter top={count === 3 ? -350 : 0} reverse={true} />
+        <Counter number={count === 3 ? 6 : undefined} reverse={true} />
         <Counter
-          top={count === 1 ? 0 : count === 2 ? 250 : count === 3 ? 300 : 0}
+          number={
+            count === 1
+              ? undefined
+              : count === 2
+              ? 4
+              : count === 3
+              ? 5
+              : undefined
+          }
           reverse={false}
         />
         <Counter
-          top={count === 1 ? -150 : count === 2 ? -200 : count === 3 ? -250 : 0}
+          number={count === 1 ? 2 : count === 2 ? 3 : count === 3 ? 4 : 0}
           reverse={true}
         />
       </span>
@@ -39,14 +47,24 @@ export default function Status({
       </div>
       <span className="status__digit">
         <Counter
-          top={count === 1 ? -100 : count === 2 ? -150 : count === 3 ? -200 : 0}
+          number={
+            count === 1 ? 1 : count === 2 ? 2 : count === 3 ? 3 : undefined
+          }
           reverse={true}
         />
         <Counter
-          top={count === 1 ? 0 : count === 2 ? 100 : count === 3 ? 150 : 0}
+          number={
+            count === 1
+              ? undefined
+              : count === 2
+              ? 1
+              : count === 3
+              ? 2
+              : undefined
+          }
           reverse={false}
         />
-        <Counter top={count === 3 ? -100 : 0} reverse={true} />
+        <Counter number={count === 3 ? 1 : undefined} reverse={true} />
       </span>
     </section>
   );
