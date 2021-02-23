@@ -9,6 +9,10 @@ interface ICount {
 
 export default function Count({ count }: ICount): React.ReactElement {
   const dispatch = useDispatch();
+  const handlerClick = (number: number) => {
+    dispatch(setCount(number));
+    localStorage.setItem("countNumbers", number.toString());
+  };
   return (
     <section className="main__number-of-digits number-of-digits">
       <h2 className="number-of-digits__title">Count</h2>
@@ -17,7 +21,7 @@ export default function Count({ count }: ICount): React.ReactElement {
           "number-of-digits__item",
           count === 1 ? "number-of-digits__item-active" : ""
         )}
-        onClick={() => dispatch(setCount(1))}
+        onClick={() => handlerClick(1)}
       >
         <div className="number-of-digits__digit">1</div>
       </div>
@@ -26,7 +30,7 @@ export default function Count({ count }: ICount): React.ReactElement {
           "number-of-digits__item",
           count === 2 ? "number-of-digits__item-active" : ""
         )}
-        onClick={() => dispatch(setCount(2))}
+        onClick={() => handlerClick(2)}
       >
         <div className="number-of-digits__digit">2</div>
         <div className="number-of-digits__digit">2</div>
@@ -36,7 +40,7 @@ export default function Count({ count }: ICount): React.ReactElement {
           "number-of-digits__item",
           count === 3 ? "number-of-digits__item-active" : ""
         )}
-        onClick={() => dispatch(setCount(3))}
+        onClick={() => handlerClick(3)}
       >
         <div className="number-of-digits__digit">1</div>
         <div className="number-of-digits__digit">2</div>

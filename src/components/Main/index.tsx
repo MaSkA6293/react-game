@@ -6,7 +6,7 @@ import Status from "../Status";
 import Playgame from "../Playgame";
 import Sign from "../Sign";
 import Achievement from "../Achievement";
-import { setSign, setBestResults } from "../../actionCreators";
+import { setSign, setBestResults, setCount } from "../../actionCreators";
 import {
   selectGameSign,
   selectGameCount,
@@ -26,6 +26,10 @@ export default function Main(): React.ReactElement {
     const localStorageBestResults = localStorage.getItem("quick-count");
     if (localStorageBestResults) {
       dispatch(setBestResults(JSON.parse(localStorageBestResults)));
+    }
+    const localStorageCountNumbers = localStorage.getItem("countNumbers");
+    if (localStorageCountNumbers) {
+      dispatch(setCount(+JSON.parse(localStorageCountNumbers)));
     }
   }, []);
   return (

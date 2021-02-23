@@ -7,6 +7,7 @@ import {
   selectGameStep,
   selectGameTimeUp,
   selectGameCountTasks,
+  selectGameCount,
 } from "../../selectors";
 import Bord from "../Bord";
 import Counter from "../Counter";
@@ -23,8 +24,11 @@ export default function Game(): React.ReactElement {
   const step = useSelector(selectGameStep);
   const timeUp = useSelector(selectGameTimeUp);
   const countTasks = useSelector(selectGameCountTasks);
+  const countNumber = localStorage.getItem("countNumbers")
+    ? +localStorage.getItem("countNumbers")!
+    : useSelector(selectGameCount);
   React.useEffect(() => {
-    const [a, b] = getExpressionItems(countTasks, sign!);
+    const [a, b] = getExpressionItems(countTasks, sign!, countNumber!);
     const result = getResult(a, b, sign!);
     setLefArr(a);
     setRightArr(b);
@@ -48,7 +52,6 @@ export default function Game(): React.ReactElement {
   const [timerStop, setTimerStop] = React.useState<boolean>(false);
   const [timeFinish, setTimeFinish] = React.useState<number>(0);
   const [timeStart, setTimeStart] = React.useState<number>(0);
-  const [resultTime, setResultTime] = React.useState<number>(0);
   const [bord, setBord] = React.useState<(number | undefined)[]>([]);
   const [leftArr, setLefArr] = React.useState<number[]>([]);
   const [rightArr, setRightArr] = React.useState<number[]>([]);
@@ -67,7 +70,6 @@ export default function Game(): React.ReactElement {
   }
 
   function closeModal() {
-    //  saveResultToStorage(resultTime, sign!);
     history.push("/");
   }
   function tryAgain() {
@@ -91,7 +93,13 @@ export default function Game(): React.ReactElement {
       resultArr = str;
     }
     if (reverse) {
-      resultArr.reverse();
+      if (str.length === 1) {
+        resultArr = [...str, undefined, undefined];
+      } else if (str.length === 2) {
+        resultArr = [...str, undefined];
+      } else {
+        resultArr = str;
+      }
     }
     return (
       <div className="current-expression__block">
@@ -124,7 +132,6 @@ export default function Game(): React.ReactElement {
           const record = +((new Date().getTime() - timeStart) / 1000).toFixed(
             2
           );
-          setResultTime(record);
           openModal();
 
           saveResultToStorage(record, sign!);

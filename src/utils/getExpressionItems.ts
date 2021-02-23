@@ -1,16 +1,37 @@
+function getRandomArbitrary(min: number, max: number): number {
+  return Math.random() * (max - min) + min;
+}
 export const getExpressionItems = (
   count: number,
-  sign: string
+  sign: string,
+  countNumber: number
 ): [number[], number[]] => {
+  let min: number, max: number;
+  switch (countNumber) {
+    case 1:
+      min = 0;
+      max = 10;
+      break;
+    case 2:
+      min = 10;
+      max = 100;
+      break;
+    case 3:
+      min = 100;
+      max = 1000;
+      break;
+  }
   const arrA = Array(count)
     .fill(undefined)
     .map(() => {
-      return Math.floor(Math.random() * 10);
+      //return Math.floor(Math.random() * 10);
+      return Math.floor(getRandomArbitrary(min, max));
     });
   const arrB = Array(count)
     .fill(undefined)
     .map(() => {
-      return Math.floor(Math.random() * 10);
+      //  return Math.floor(Math.random() * 10);
+      return Math.floor(getRandomArbitrary(min, max));
     });
   if (sign === "-") {
     let tempValue: number;

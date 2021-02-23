@@ -14,8 +14,8 @@ const initialState: IStateGame = {
   sign: "+",
   count: 1,
   step: 1000,
-  timeUp: 10000,
-  countTasks: 1,
+  timeUp: 1000000,
+  countTasks: 10,
   bestResults: undefined,
 };
 
