@@ -1,12 +1,14 @@
 import produce from "immer";
 import { GameActionsTypes } from "../actionCreators/index";
 import { GameActionsType } from "../constants";
+import { IsetBestResultsProps } from "../actionCreators";
 export interface IStateGame {
   sign: string;
   count: number;
   step: number;
   timeUp: number;
   countTasks: number;
+  bestResults: IsetBestResultsProps | undefined;
 }
 const initialState: IStateGame = {
   sign: "+",
@@ -14,6 +16,7 @@ const initialState: IStateGame = {
   step: 1000,
   timeUp: 10000,
   countTasks: 1,
+  bestResults: undefined,
 };
 
 const game = (
@@ -27,6 +30,9 @@ const game = (
         break;
       case GameActionsType.SET_COUNT:
         draft.count = action.payload.count;
+        break;
+      case GameActionsType.SET_BEST_RESULTS:
+        draft.bestResults = action.payload;
         break;
       default:
         state;

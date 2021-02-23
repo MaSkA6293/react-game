@@ -9,7 +9,6 @@ import { setSign } from "../../actionCreators";
 
 export default function Sign({ sign }: any): React.ReactElement {
   React.useEffect(() => {
-    console.log(sign);
     rotateSelector(sign);
   }, [sign]);
   const [angle, setAngle] = React.useState<number>(45);

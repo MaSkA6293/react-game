@@ -22,5 +22,21 @@ export const setCount = (count: number): IsetCount => {
     payload: { count },
   };
 };
+interface IsetBestResults {
+  type: typeof GameActionsType.SET_BEST_RESULTS;
+  payload: IsetBestResultsProps;
+}
 
-export type GameActionsTypes = IsetSign | IsetCount;
+export interface IsetBestResultsProps {
+  "*": { record: number };
+  "+": { record: number };
+  "-": { record: number };
+  ":": { record: number };
+}
+export const setBestResults = (
+  results: IsetBestResultsProps
+): IsetBestResults => {
+  return { type: GameActionsType.SET_BEST_RESULTS, payload: results };
+};
+
+export type GameActionsTypes = IsetSign | IsetCount | IsetBestResults;

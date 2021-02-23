@@ -56,6 +56,7 @@ export default function Game(): React.ReactElement {
   const [indexResultArr, setIndexResultArr] = React.useState(0);
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [message, setMessage] = React.useState("");
+
   const sign = localStorage.getItem("sign")
     ? localStorage.getItem("sign")
     : useSelector(selectGameSign);
@@ -66,6 +67,7 @@ export default function Game(): React.ReactElement {
   }
 
   function closeModal() {
+    //  saveResultToStorage(resultTime, sign!);
     history.push("/");
   }
   function tryAgain() {

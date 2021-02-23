@@ -6,17 +6,26 @@ import Status from "../Status";
 import Playgame from "../Playgame";
 import Sign from "../Sign";
 import Achievement from "../Achievement";
-import { setSign } from "../../actionCreators";
-import { selectGameSign, selectGameCount } from "../../selectors";
+import { setSign, setBestResults } from "../../actionCreators";
+import {
+  selectGameSign,
+  selectGameCount,
+  selectGameBestResults,
+} from "../../selectors";
 
 export default function Main(): React.ReactElement {
   const sign = useSelector(selectGameSign);
   const count = useSelector(selectGameCount);
+  const bestResults = useSelector(selectGameBestResults);
   const dispatch = useDispatch();
   React.useEffect(() => {
     const localStorageSign = localStorage.getItem("sign");
     if (localStorageSign) {
       dispatch(setSign(localStorageSign));
+    }
+    const localStorageBestResults = localStorage.getItem("quick-count");
+    if (localStorageBestResults) {
+      dispatch(setBestResults(JSON.parse(localStorageBestResults)));
     }
   }, []);
   return (
@@ -26,7 +35,7 @@ export default function Main(): React.ReactElement {
           <Status count={count} sign={sign} />
           <section className="main__set-up-game">
             <Sign sign={sign} />
-            <Achievement />
+            <Achievement bestResults={bestResults} sign={sign} />
             <Count count={count} />
           </section>
           <Playgame />
