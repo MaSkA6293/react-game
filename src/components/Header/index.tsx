@@ -3,7 +3,7 @@ import "./styles.scss";
 import { ReactComponent as Menu } from "../../assets/menu-button-of-three-horizontal-lines.svg";
 import { ReactComponent as FullScreen } from "../../assets/switch-to-full-screen-button.svg";
 
-export default function Header() {
+export default function Header({ handle }: any): React.ReactElement {
   return (
     <header className="header">
       <div className="contaner">
@@ -17,7 +17,11 @@ export default function Header() {
             height="20px"
           />
         </button>
-        <button className="header__full-screen" title="Full screen">
+        <button
+          className="header__full-screen"
+          title="Full screen"
+          onClick={handle.enter}
+        >
           <FullScreen
             className="header__full-screen-image"
             fill="black"

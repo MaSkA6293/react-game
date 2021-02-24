@@ -61,8 +61,14 @@
     }
     &__bord-item-text-md{
         font-size: 1.5rem;
+        &:hover {
+            font-size: 1.5rem;
+        }
     }
     &__bord-item-text-sm{
         font-size: 1rem;
+        &:hover {
+            font-size: 1rem;
+        }
     }
 }

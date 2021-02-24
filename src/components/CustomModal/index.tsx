@@ -1,11 +1,12 @@
 import React from "react";
-import ReactModal from "react-modal";
+import Modal from "react-modal";
 import "./styles.scss";
 interface ICustomModal {
   isOpen: boolean;
   closeModal: () => void;
   message: string;
   tryAgain: () => void;
+  root: any;
 }
 
 export default function CustomModal({
@@ -13,6 +14,7 @@ export default function CustomModal({
   closeModal,
   message,
   tryAgain,
+  root,
 }: ICustomModal): React.ReactElement {
   const customStyles = {
     content: {
@@ -27,12 +29,13 @@ export default function CustomModal({
     },
   };
   return (
-    <ReactModal
+    <Modal
       appElement={document.getElementById("root") as HTMLElement}
       isOpen={isOpen}
       onRequestClose={closeModal}
       style={customStyles}
       contentLabel="Example Modal"
+      parentSelector={() => root.current}
     >
       <div className="modal">
         <h1 className="modal__message">{message}</h1>
@@ -45,6 +48,6 @@ export default function CustomModal({
           </button>
         </div>
       </div>
-    </ReactModal>
+    </Modal>
   );
 }

@@ -20,7 +20,7 @@ import { saveResultToStorage } from "../../utils/saveResultToStorage";
 import { getResult } from "../../utils/getResult";
 import { getExpressionItems } from "../../utils/getExpressionItems";
 
-export default function Game(): React.ReactElement {
+export default function Game({ myroot }: any): React.ReactElement {
   const step = useSelector(selectGameStep);
   const timeUp = useSelector(selectGameTimeUp);
   const countTasks = useSelector(selectGameCountTasks);
@@ -40,6 +40,21 @@ export default function Game(): React.ReactElement {
     setTimeStart(new Date().getTime());
     setTimeFinish(new Date().getTime() + timeUp);
   }, []);
+  const [restart, setRestart] = React.useState<boolean>(false);
+  React.useEffect(() => {
+    setIsOpen(false);
+    const [a, b] = getExpressionItems(countTasks, sign!, countNumber!);
+    const result = getResult(a, b, sign!);
+    setLefArr(a);
+    setRightArr(b);
+    setResultArr(result);
+    const board = Array(48 - result.length)
+      .fill(undefined)
+      .concat(result);
+    setBord(getSuffleArr(board));
+    setTimeStart(new Date().getTime());
+    setTimeFinish(new Date().getTime() + timeUp);
+  }, [restart]);
 
   const ranOutOfTime = () => {
     setMessage("You lose... You should try again!");
@@ -73,7 +88,7 @@ export default function Game(): React.ReactElement {
     history.push("/");
   }
   function tryAgain() {
-    window.location.reload();
+    setRestart((prev) => !prev);
   }
 
   const renderCurrentExpression = (
@@ -145,12 +160,15 @@ export default function Game(): React.ReactElement {
   };
   return (
     <div className="game">
-      <CustomModal
-        isOpen={modalIsOpen}
-        closeModal={closeModal}
-        message={message}
-        tryAgain={tryAgain}
-      />
+      {myroot.current && (
+        <CustomModal
+          isOpen={modalIsOpen}
+          closeModal={closeModal}
+          message={message}
+          tryAgain={tryAgain}
+          root={myroot}
+        />
+      )}
 
       <div className="game__contaner">
         <Link to="/" className="game__get-back">
