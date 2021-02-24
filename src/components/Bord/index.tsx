@@ -1,5 +1,6 @@
 import React from "react";
 import classNames from "classnames";
+import { sign } from "crypto";
 
 interface IBord {
   bord: (number | undefined)[];
@@ -17,7 +18,13 @@ export default function Bord({
           <div
             className={classNames(
               "game__bord-item",
-              el !== undefined ? "game__bord-item-activ" : ""
+              el !== undefined ? "game__bord-item-activ" : "",
+              el !== undefined && el?.toString().length >= 4
+                ? "game__bord-item-text-md"
+                : "",
+              el !== undefined && el?.toString().length >= 6
+                ? "game__bord-item-text-sm"
+                : ""
             )}
             key={i}
             onClick={(e: React.MouseEvent<HTMLDivElement>) =>
