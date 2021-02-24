@@ -39,7 +39,11 @@ export default function Main(): React.ReactElement {
           <Status count={count} sign={sign} />
           <section className="main__set-up-game">
             <Sign sign={sign} />
-            <Achievement bestResults={bestResults} sign={sign} />
+            <Achievement
+              bestResults={bestResults}
+              sign={sign}
+              countNumber={count}
+            />
             <Count count={count} />
           </section>
           <Playgame />

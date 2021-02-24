@@ -15,7 +15,7 @@ const initialState: IStateGame = {
   count: 1,
   step: 1000,
   timeUp: 1000000,
-  countTasks: 10,
+  countTasks: 5,
   bestResults: undefined,
 };
 

@@ -134,7 +134,7 @@ export default function Game(): React.ReactElement {
           );
           openModal();
 
-          saveResultToStorage(record, sign!);
+          saveResultToStorage(record, sign!, countNumber!);
         }
       } else {
         setMessage("You lose... You should try again!");
