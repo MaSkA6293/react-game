@@ -16,8 +16,13 @@ import Settings from "../Settings";
 interface IMain {
   toggle: () => void;
   playing: boolean;
+  myroot: any;
 }
-export default function Main({ toggle, playing }: IMain): React.ReactElement {
+export default function Main({
+  toggle,
+  playing,
+  myroot,
+}: IMain): React.ReactElement {
   const sign = useSelector(selectGameSign);
   const count = useSelector(selectGameCount);
   const bestResults = useSelector(selectGameBestResults);
@@ -42,7 +47,7 @@ export default function Main({ toggle, playing }: IMain): React.ReactElement {
         <div className="main__contaner">
           <Status count={count} sign={sign} />
           <section className="main__settings">
-            <Settings toggle={toggle} playing={playing} />
+            <Settings toggle={toggle} playing={playing} myroot={myroot} />
           </section>
           <section className="main__set-up-game">
             <Sign sign={sign} />

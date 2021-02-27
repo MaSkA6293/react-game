@@ -168,6 +168,7 @@ export default function Game({ myroot }: any): React.ReactElement {
           message={message}
           tryAgain={tryAgain}
           root={myroot}
+          child={undefined}
         />
       )}
 

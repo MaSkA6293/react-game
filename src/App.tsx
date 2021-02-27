@@ -19,7 +19,7 @@ function App(): React.ReactElement {
           <Header handle={handle} />
           <Switch>
             <Route path="/" exact>
-              <Main playing={playing} toggle={toggle} />
+              <Main playing={playing} toggle={toggle} myroot={myroot} />
             </Route>
             <Route path="/game">
               <Game myroot={myroot} />

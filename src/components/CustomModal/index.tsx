@@ -1,11 +1,12 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import Modal from "react-modal";
 import "./styles.scss";
 interface ICustomModal {
   isOpen: boolean;
   closeModal: () => void;
-  message: string;
-  tryAgain: () => void;
+  message: string | undefined;
+  child: any;
+  tryAgain: (() => void) | undefined;
   root: any;
 }
 
@@ -15,6 +16,7 @@ export default function CustomModal({
   message,
   tryAgain,
   root,
+  child,
 }: ICustomModal): React.ReactElement {
   const customStyles = {
     content: {
@@ -26,6 +28,7 @@ export default function CustomModal({
       transform: "translate(-50%, -50%)",
       background: "#97ed98",
       minWidth: "400px",
+      maxWidth: "500px",
     },
   };
   return (
@@ -38,14 +41,17 @@ export default function CustomModal({
       parentSelector={() => root.current}
     >
       <div className="modal">
-        <h1 className="modal__message">{message}</h1>
+        {child}
+        {message && <h1 className="modal__message">{message}</h1>}
         <div className="modal__buttons">
           <button className="modal__close" onClick={closeModal}>
             close
           </button>
-          <button className="modal__try-again" onClick={tryAgain}>
-            Try again
-          </button>
+          {tryAgain && (
+            <button className="modal__try-again" onClick={tryAgain}>
+              Try again
+            </button>
+          )}
         </div>
       </div>
     </Modal>
