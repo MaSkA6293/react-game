@@ -35,7 +35,13 @@ export default function Timer({
   const [progress, setProgress] = React.useState(100);
   return (
     <section className="timer">
-      <div className="timer__progress" style={{ width: progress + "%" }}></div>
+      <h2 className="timer__title">Time left</h2>
+      <div className="timer__body">
+        <div
+          className="timer__progress"
+          style={{ width: progress + "%" }}
+        ></div>
+      </div>
     </section>
   );
 }
