@@ -7,6 +7,7 @@ import Playgame from "../Playgame";
 import Sign from "../Sign";
 import Achievement from "../Achievement";
 import { setSign, setBestResults, setCount } from "../../actionCreators";
+import Complexity from "../Complexity";
 import {
   selectGameSign,
   selectGameCount,
@@ -58,6 +59,7 @@ export default function Main({
             />
             <Count count={count} />
           </section>
+          <Complexity />
           <Playgame />
         </div>
       </div>

@@ -39,4 +39,39 @@ export const setBestResults = (
   return { type: GameActionsType.SET_BEST_RESULTS, payload: results };
 };
 
-export type GameActionsTypes = IsetSign | IsetCount | IsetBestResults;
+interface IsetLevel {
+  type: GameActionsType.SET_LEVEL;
+  payload: IsetLevelProps;
+}
+
+interface IsetLevelProps {
+  countTasks: number;
+  timeUp: number;
+}
+export const setLevel = (level: number): IsetLevel => {
+  let obj: IsetLevelProps = { countTasks: 0, timeUp: 0 };
+  switch (level) {
+    case 1:
+      obj = { ...obj, countTasks: 3, timeUp: 15 * 1000 };
+      localStorage.setItem("levelSet", JSON.stringify(obj));
+      break;
+    case 2:
+      obj = { ...obj, countTasks: 6, timeUp: 20 * 1000 };
+      localStorage.setItem("levelSet", JSON.stringify(obj));
+      break;
+    case 3:
+      obj = { ...obj, countTasks: 8, timeUp: 30 * 1000 };
+      localStorage.setItem("levelSet", JSON.stringify(obj));
+      break;
+  }
+  console.log(level);
+  return {
+    type: GameActionsType.SET_LEVEL,
+    payload: obj,
+  };
+};
+export type GameActionsTypes =
+  | IsetSign
+  | IsetCount
+  | IsetBestResults
+  | IsetLevel;

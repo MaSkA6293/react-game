@@ -14,8 +14,8 @@ const initialState: IStateGame = {
   sign: "+",
   count: 1,
   step: 1000,
-  timeUp: 1000000,
-  countTasks: 5,
+  timeUp: 15 * 1000,
+  countTasks: 3,
   bestResults: undefined,
 };
 
@@ -33,6 +33,10 @@ const game = (
         break;
       case GameActionsType.SET_BEST_RESULTS:
         draft.bestResults = action.payload;
+        break;
+      case GameActionsType.SET_LEVEL:
+        draft.countTasks = action.payload.countTasks;
+        draft.timeUp = action.payload.timeUp;
         break;
       default:
         state;

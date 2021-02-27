@@ -19,14 +19,18 @@ import Timer from "../Timer";
 import { saveResultToStorage } from "../../utils/saveResultToStorage";
 import { getResult } from "../../utils/getResult";
 import { getExpressionItems } from "../../utils/getExpressionItems";
-
 export default function Game({ myroot }: any): React.ReactElement {
   const step = useSelector(selectGameStep);
-  const timeUp = useSelector(selectGameTimeUp);
-  const countTasks = useSelector(selectGameCountTasks);
+
+  const countTasks = localStorage.getItem("levelSet")
+    ? JSON.parse(localStorage.getItem("levelSet")!).countTasks
+    : useSelector(selectGameCountTasks);
   const countNumber = localStorage.getItem("countNumbers")
     ? +localStorage.getItem("countNumbers")!
     : useSelector(selectGameCount);
+  const timeUp = localStorage.getItem("levelSet")
+    ? JSON.parse(localStorage.getItem("levelSet")!).timeUp * countNumber
+    : useSelector(selectGameTimeUp);
   React.useEffect(() => {
     const [a, b] = getExpressionItems(countTasks, sign!, countNumber!);
     const result = getResult(a, b, sign!);
@@ -40,6 +44,7 @@ export default function Game({ myroot }: any): React.ReactElement {
     setTimeStart(new Date().getTime());
     setTimeFinish(new Date().getTime() + timeUp);
   }, []);
+
   const [restart, setRestart] = React.useState<boolean>(false);
   React.useEffect(() => {
     setIsOpen(false);
@@ -55,6 +60,7 @@ export default function Game({ myroot }: any): React.ReactElement {
     setBord(getSuffleArr(board));
     setTimeStart(new Date().getTime());
     setTimeFinish(new Date().getTime() + timeUp);
+    setTimerStop(false);
   }, [restart]);
 
   const ranOutOfTime = () => {
@@ -185,6 +191,7 @@ export default function Game({ myroot }: any): React.ReactElement {
           finish={timeFinish}
           ranOutOfTime={ranOutOfTime}
           stop={timerStop}
+          restart={restart}
         />
 
         <section className="game__current-expression current-expression">

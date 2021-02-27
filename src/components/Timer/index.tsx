@@ -7,6 +7,7 @@ interface ITimer {
   stop: boolean;
   start: number;
   finish: number;
+  restart: boolean;
 }
 export default function Timer({
   step,
@@ -14,6 +15,7 @@ export default function Timer({
   start,
   finish,
   ranOutOfTime,
+  restart,
 }: ITimer): React.ReactElement {
   const difference = finish - start;
   const stepTimer = (step * 100) / difference;
@@ -32,6 +34,9 @@ export default function Timer({
     }
     return () => clearTimeout(timer);
   });
+  React.useEffect(() => {
+    setProgress(100);
+  }, [restart]);
   const [progress, setProgress] = React.useState(100);
   return (
     <section className="timer">
