@@ -48,6 +48,7 @@ export default function Game({ myroot }: any): React.ReactElement {
     setLefArr(a);
     setRightArr(b);
     setResultArr(result);
+    setIndexResultArr(0);
     const board = Array(48 - result.length)
       .fill(undefined)
       .concat(result);
