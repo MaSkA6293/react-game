@@ -169,6 +169,8 @@ export default function Game({ myroot }: any): React.ReactElement {
           tryAgain={tryAgain}
           root={myroot}
           child={undefined}
+          closeShow={true}
+          closeMessage={"Close"}
         />
       )}
 

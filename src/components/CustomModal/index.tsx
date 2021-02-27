@@ -8,6 +8,8 @@ interface ICustomModal {
   child: any;
   tryAgain: (() => void) | undefined;
   root: any;
+  closeShow: boolean;
+  closeMessage: string;
 }
 
 export default function CustomModal({
@@ -17,6 +19,8 @@ export default function CustomModal({
   tryAgain,
   root,
   child,
+  closeShow,
+  closeMessage,
 }: ICustomModal): React.ReactElement {
   const customStyles = {
     content: {
@@ -29,6 +33,7 @@ export default function CustomModal({
       background: "#97ed98",
       minWidth: "400px",
       maxWidth: "500px",
+      borderRadius: "15px",
     },
   };
   return (
@@ -44,9 +49,11 @@ export default function CustomModal({
         {child}
         {message && <h1 className="modal__message">{message}</h1>}
         <div className="modal__buttons">
-          <button className="modal__close" onClick={closeModal}>
-            close
-          </button>
+          {closeShow && (
+            <button className="modal__close" onClick={closeModal}>
+              {closeMessage}
+            </button>
+          )}
           {tryAgain && (
             <button className="modal__try-again" onClick={tryAgain}>
               Try again

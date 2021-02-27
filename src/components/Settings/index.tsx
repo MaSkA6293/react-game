@@ -23,10 +23,24 @@ export default function Settings({
       localStorage.setItem("quick-count", "");
       dispatch(setBestResults(undefined));
     }
+    setChild(undefined);
+    setCloseMessage("");
+    setMessage("The results was successfully removed");
+    setOpen(true);
+    setTimeout(() => {
+      closeModal();
+    }, 1000);
   };
   const [open, setOpen] = React.useState(false);
+  const [message, setMessage] = React.useState("");
+  const [child, setChild] = React.useState<any>();
+  const [closeMessage, setCloseMessage] = React.useState("");
 
   const handleShowRules = () => {
+    setOpen(true);
+    setMessage("");
+    setChild(textRule());
+    setCloseMessage("Ok");
     setOpen(true);
   };
   const closeModal = () => {
@@ -34,11 +48,14 @@ export default function Settings({
   };
   const textRule = () => {
     return (
-      <p className="settings__rules">
-        {" "}
-        You need to sort out the task on the scoreboard above and choose the
-        correct answer
-      </p>
+      <div className="settings__rules">
+        <h2 className="settings__title">Rules</h2>
+        <p className="settings__text">
+          {" "}
+          You need to sort out the task on the scoreboard above and choose the
+          correct answer
+        </p>
+      </div>
     );
   };
   return (
@@ -49,8 +66,10 @@ export default function Settings({
           closeModal={closeModal}
           root={myroot}
           tryAgain={undefined}
-          message={undefined}
-          child={textRule()}
+          message={message}
+          child={child}
+          closeShow={!!closeMessage}
+          closeMessage={closeMessage}
         />
       )}
       <ul className="settings__list">
