@@ -21,10 +21,16 @@
             .header__full-screen-image{
                 fill: white;
             }
+            .header__button-title{
+                color:white
+            }
         }
         &:focus{
             outline: none;
         }
+    }
+    &__button-title{
+        padding-right: 10px;
     }
     &__menu{
         padding: 0;
