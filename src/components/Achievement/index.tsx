@@ -20,6 +20,8 @@ export default function Achievement({
           ? bestResults[`${sign}`][`${countNumber}`].record.toString()
           : "--"
       );
+    } else {
+      setBest("--");
     }
   }, [sign, bestResults, countNumber]);
   const [best, setBest] = React.useState("--");

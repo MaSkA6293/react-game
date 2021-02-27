@@ -24,7 +24,7 @@ export const setCount = (count: number): IsetCount => {
 };
 interface IsetBestResults {
   type: typeof GameActionsType.SET_BEST_RESULTS;
-  payload: IsetBestResultsProps;
+  payload: IsetBestResultsProps | undefined;
 }
 
 export interface IsetBestResultsProps {
@@ -34,7 +34,7 @@ export interface IsetBestResultsProps {
   ":": { record: number };
 }
 export const setBestResults = (
-  results: IsetBestResultsProps
+  results: IsetBestResultsProps | undefined
 ): IsetBestResults => {
   return { type: GameActionsType.SET_BEST_RESULTS, payload: results };
 };

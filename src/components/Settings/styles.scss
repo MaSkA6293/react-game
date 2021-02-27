@@ -1,8 +1,16 @@
 .settings{
     &__list-item{
         width: 60px;
+        padding: 0 10px;
+        &:hover{
+            cursor: pointer;
+            fill:#3f8a3e
+        }
     }
     &__list{
+        display: flex;
+        justify-content: center;
+        padding: 0;
         list-style: none;
     }
 }
