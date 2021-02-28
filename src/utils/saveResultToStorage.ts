@@ -1,47 +1,42 @@
 export const saveResultToStorage = (
   record: number,
   sign: string,
-  countNumber: number
+  countNumber: number,
+  level: number
 ): void => {
-  const storage = localStorage.getItem("quick-count");
+  const storage = localStorage.getItem("results");
   if (storage) {
-    const parseStorage = JSON.parse(storage);
-    if (parseStorage[`${sign}`] !== undefined) {
-      if (parseStorage[`${sign}`][`${countNumber}`] !== undefined) {
-        if (+parseStorage[`${sign}`][`${countNumber}`].record > record) {
-          const newRecord = { ...parseStorage[`${sign}`][`${countNumber}`] };
-          newRecord.record = record;
-          const newCount = {
-            ...parseStorage[`${sign}`],
-            [`${countNumber}`]: newRecord,
-          };
-          const newSign = { ...parseStorage, [`${sign}`]: newCount };
-          localStorage.setItem("quick-count", JSON.stringify(newSign));
-        }
-      } else {
-        const obj = {
-          ...parseStorage,
-          [`${sign}`]: {
-            ...parseStorage[`${sign}`],
-            [`${countNumber}`]: { record: record },
-          },
-        };
-        localStorage.setItem("quick-count", JSON.stringify(obj));
-        return;
-      }
-    } else {
-      const obj = {
-        [`${sign}`]: { [`${countNumber}`]: { record: record } },
-      };
-      localStorage.setItem(
-        "quick-count",
-        JSON.stringify({ ...parseStorage, ...obj })
-      );
-    }
+    const prevRes = JSON.parse(storage)[`${sign}`][`${countNumber}`][`${level}`]
+      .result;
+    if (prevRes > record || prevRes === "--") {
+      const updateResults = JSON.parse(storage);
+      updateResults[`${sign}`][`${countNumber}`][`${level}`].result = record;
+      localStorage.setItem("results", JSON.stringify(updateResults));
+    } else return;
   } else {
-    const obj = {
-      [`${sign}`]: { [`${countNumber}`]: { record: record } },
+    const objResults: any = {
+      "+": {
+        1: { 1: { result: "--" }, 2: { result: "--" }, 3: { result: "--" } },
+        2: { 1: { result: "--" }, 2: { result: "--" }, 3: { result: "--" } },
+        3: { 1: { result: "--" }, 2: { result: "--" }, 3: { result: "--" } },
+      },
+      "-": {
+        1: { 1: { result: "--" }, 2: { result: "--" }, 3: { result: "--" } },
+        2: { 1: { result: "--" }, 2: { result: "--" }, 3: { result: "--" } },
+        3: { 1: { result: "--" }, 2: { result: "--" }, 3: { result: "--" } },
+      },
+      "*": {
+        1: { 1: { result: "--" }, 2: { result: "--" }, 3: { result: "--" } },
+        2: { 1: { result: "--" }, 2: { result: "--" }, 3: { result: "--" } },
+        3: { 1: { result: "--" }, 2: { result: "--" }, 3: { result: "--" } },
+      },
+      ":": {
+        1: { 1: { result: "--" }, 2: { result: "--" }, 3: { result: "--" } },
+        2: { 1: { result: "--" }, 2: { result: "--" }, 3: { result: "--" } },
+        3: { 1: { result: "--" }, 2: { result: "--" }, 3: { result: "--" } },
+      },
     };
-    localStorage.setItem("quick-count", JSON.stringify(obj));
+    objResults[`${sign}`][`${countNumber}`][`${level}`].result = record;
+    localStorage.setItem("results", JSON.stringify(objResults));
   }
 };

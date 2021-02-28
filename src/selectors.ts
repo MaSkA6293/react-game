@@ -16,3 +16,6 @@ export const selectGameCountTasks = (state: IGlobalStore): number =>
 export const selectGameBestResults = (
   state: IGlobalStore
 ): IsetBestResultsProps | undefined => selectGameState(state).bestResults;
+
+export const selectGameLevel = (state: IGlobalStore): number =>
+  selectGameState(state).level;

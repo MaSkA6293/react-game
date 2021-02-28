@@ -5,25 +5,21 @@ interface IAchievement {
   bestResults: any;
   sign: string;
   countNumber: number;
+  level: number;
 }
 
 export default function Achievement({
   bestResults,
   sign,
   countNumber,
+  level,
 }: IAchievement): React.ReactElement {
   const cup = <Cup fill="black" width="100%" height="100%" />;
   React.useEffect(() => {
-    if (bestResults !== undefined && bestResults[`${sign}`] !== undefined) {
-      setBest(
-        bestResults[`${sign}`][`${countNumber}`] !== undefined
-          ? bestResults[`${sign}`][`${countNumber}`].record.toString()
-          : "--"
-      );
-    } else {
-      setBest("--");
+    if (bestResults !== undefined) {
+      setBest(bestResults[`${sign}`][`${countNumber}`][`${level}`].result);
     }
-  }, [sign, bestResults, countNumber]);
+  }, [sign, bestResults, countNumber, level]);
   const [best, setBest] = React.useState("--");
   return (
     <section className="main__last-record">

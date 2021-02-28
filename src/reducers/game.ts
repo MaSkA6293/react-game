@@ -9,6 +9,7 @@ export interface IStateGame {
   timeUp: number;
   countTasks: number;
   bestResults: IsetBestResultsProps | undefined;
+  level: number;
 }
 const initialState: IStateGame = {
   sign: "+",
@@ -17,6 +18,7 @@ const initialState: IStateGame = {
   timeUp: 15 * 1000,
   countTasks: 3,
   bestResults: undefined,
+  level: 1,
 };
 
 const game = (
@@ -37,6 +39,7 @@ const game = (
       case GameActionsType.SET_LEVEL:
         draft.countTasks = action.payload.countTasks;
         draft.timeUp = action.payload.timeUp;
+        draft.level = action.payload.level;
         break;
       default:
         state;

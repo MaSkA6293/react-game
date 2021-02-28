@@ -8,6 +8,7 @@ import {
   selectGameTimeUp,
   selectGameCountTasks,
   selectGameCount,
+  selectGameLevel,
 } from "../../selectors";
 import Bord from "../Bord";
 import Counter from "../Counter";
@@ -31,6 +32,11 @@ export default function Game({ myroot }: any): React.ReactElement {
   const timeUp = localStorage.getItem("levelSet")
     ? JSON.parse(localStorage.getItem("levelSet")!).timeUp * countNumber
     : useSelector(selectGameTimeUp);
+  const level =
+    localStorage.getItem("levelComplexity") !== null
+      ? +localStorage.getItem("levelComplexity")!
+      : useSelector(selectGameLevel);
+
   React.useEffect(() => {
     const [a, b] = getExpressionItems(countTasks, sign!, countNumber!);
     const result = getResult(a, b, sign!);
@@ -70,7 +76,6 @@ export default function Game({ myroot }: any): React.ReactElement {
   const stopTimer = () => {
     setTimerStop(true);
   };
-
   const [timerStop, setTimerStop] = React.useState<boolean>(false);
   const [timeFinish, setTimeFinish] = React.useState<number>(0);
   const [timeStart, setTimeStart] = React.useState<number>(0);
@@ -156,7 +161,7 @@ export default function Game({ myroot }: any): React.ReactElement {
           );
           openModal();
 
-          saveResultToStorage(record, sign!, countNumber!);
+          saveResultToStorage(record, sign!, countNumber!, level);
         }
       } else {
         setMessage("You lose... You should try again!");

@@ -47,24 +47,24 @@ interface IsetLevel {
 interface IsetLevelProps {
   countTasks: number;
   timeUp: number;
+  level: number;
 }
 export const setLevel = (level: number): IsetLevel => {
-  let obj: IsetLevelProps = { countTasks: 0, timeUp: 0 };
+  let obj: IsetLevelProps = { countTasks: 0, timeUp: 0, level: 1 };
   switch (level) {
     case 1:
-      obj = { ...obj, countTasks: 3, timeUp: 15 * 1000 };
+      obj = { ...obj, countTasks: 3, timeUp: 15 * 1000, level: 1 };
       localStorage.setItem("levelSet", JSON.stringify(obj));
       break;
     case 2:
-      obj = { ...obj, countTasks: 6, timeUp: 20 * 1000 };
+      obj = { ...obj, countTasks: 6, timeUp: 20 * 1000, level: 2 };
       localStorage.setItem("levelSet", JSON.stringify(obj));
       break;
     case 3:
-      obj = { ...obj, countTasks: 8, timeUp: 30 * 1000 };
+      obj = { ...obj, countTasks: 8, timeUp: 30 * 1000, level: 3 };
       localStorage.setItem("levelSet", JSON.stringify(obj));
       break;
   }
-  console.log(level);
   return {
     type: GameActionsType.SET_LEVEL,
     payload: obj,

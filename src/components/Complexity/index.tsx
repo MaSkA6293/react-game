@@ -18,7 +18,7 @@ export default function Complexity(): React.ReactElement {
   const handlerClick = (e: React.MouseEvent<HTMLLIElement>) => {
     const level = e.currentTarget.dataset.level;
     setLevelComplexity(+level!);
-    setLevel(+level!);
+    dispatch(setLevel(+level!));
     localStorage.setItem("levelComplexity", level!);
   };
   return (

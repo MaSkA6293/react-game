@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./styles.scss";
 import { useSelector, useDispatch } from "react-redux";
 import Count from "../Count";
@@ -6,12 +6,18 @@ import Status from "../Status";
 import Playgame from "../Playgame";
 import Sign from "../Sign";
 import Achievement from "../Achievement";
-import { setSign, setBestResults, setCount } from "../../actionCreators";
+import {
+  setSign,
+  setBestResults,
+  setCount,
+  setLevel,
+} from "../../actionCreators";
 import Complexity from "../Complexity";
 import {
   selectGameSign,
   selectGameCount,
   selectGameBestResults,
+  selectGameLevel,
 } from "../../selectors";
 import Settings from "../Settings";
 interface IMain {
@@ -28,12 +34,13 @@ export default function Main({
   const count = useSelector(selectGameCount);
   const bestResults = useSelector(selectGameBestResults);
   const dispatch = useDispatch();
+  const level = useSelector(selectGameLevel);
   React.useEffect(() => {
     const localStorageSign = localStorage.getItem("sign");
     if (localStorageSign) {
       dispatch(setSign(localStorageSign));
     }
-    const localStorageBestResults = localStorage.getItem("quick-count");
+    const localStorageBestResults = localStorage.getItem("results");
     if (localStorageBestResults) {
       dispatch(setBestResults(JSON.parse(localStorageBestResults)));
     }
@@ -41,7 +48,12 @@ export default function Main({
     if (localStorageCountNumbers) {
       dispatch(setCount(+JSON.parse(localStorageCountNumbers)));
     }
+    const localStorageLevel = localStorage.getItem("levelComplexity");
+    if (localStorageLevel) {
+      dispatch(setLevel(+JSON.parse(localStorageLevel)));
+    }
   }, []);
+
   return (
     <div className="main">
       <div className="contaner">
@@ -56,6 +68,7 @@ export default function Main({
               bestResults={bestResults}
               sign={sign}
               countNumber={count}
+              level={level}
             />
             <Count count={count} />
           </section>
