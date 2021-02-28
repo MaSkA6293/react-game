@@ -18,7 +18,7 @@ export default function Achievement({
   React.useEffect(() => {
     if (bestResults !== undefined) {
       setBest(bestResults[`${sign}`][`${countNumber}`][`${level}`].result);
-    }
+    } else setBest("--");
   }, [sign, bestResults, countNumber, level]);
   const [best, setBest] = React.useState("--");
   return (
