@@ -10,7 +10,7 @@ export default function Header({ handle }: any): React.ReactElement {
         <button
           className="header__full-screen"
           title="Full screen"
-          onClick={handle.enter}
+          onClick={handle}
         >
           <h3 className="header__button-title">Full screen</h3>
           <FullScreen
