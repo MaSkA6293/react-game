@@ -7,6 +7,7 @@ import { setBestResults } from "../../actionCreators";
 import { useDispatch } from "react-redux";
 import CustomModal from "../CustomModal";
 import "./styles.scss";
+import ConfirmModal from "../ConfirmModal";
 interface ISettings {
   toggle: () => void;
   playing: boolean;
@@ -17,25 +18,34 @@ export default function Settings({
   toggle,
   myroot,
 }: ISettings): React.ReactElement {
-  const dispatch = useDispatch();
-  const handleRemove = () => {
-    if (localStorage.getItem("quick-count") !== undefined) {
-      localStorage.setItem("quick-count", "");
-      dispatch(setBestResults(undefined));
-    }
-    setChild(undefined);
-    setCloseMessage("");
-    setMessage("The results was successfully removed");
-    setOpen(true);
-    setTimeout(() => {
-      closeModal();
-    }, 1000);
-  };
   const [open, setOpen] = React.useState(false);
+  const [openConfirm, setOpenConfirm] = React.useState(false);
+  const [isRemoving, setIsRemoving] = React.useState(false);
   const [message, setMessage] = React.useState("");
   const [child, setChild] = React.useState<any>();
   const [closeMessage, setCloseMessage] = React.useState("");
+  const dispatch = useDispatch();
 
+  const handleRemove = (e: React.MouseEvent<HTMLLIElement>) => {
+    e.preventDefault();
+    setMessage("Do you really want to remove all the best results?");
+    setOpenConfirm(true);
+  };
+  const handleConfirm = () => {
+    setIsRemoving(true);
+    if (localStorage.getItem("results") !== undefined) {
+      localStorage.setItem("results", "");
+      dispatch(setBestResults(undefined));
+    }
+    setMessage("Removing...");
+    setTimeout(() => {
+      setMessage("The results was successfully removed");
+      setTimeout(() => {
+        setOpenConfirm(false);
+        setIsRemoving(false);
+      }, 1000);
+    }, 1000);
+  };
   const handleShowRules = () => {
     setOpen(true);
     setMessage("");
@@ -70,6 +80,16 @@ export default function Settings({
           child={child}
           closeShow={!!closeMessage}
           closeMessage={closeMessage}
+        />
+      )}
+      {myroot.current && (
+        <ConfirmModal
+          isOpen={openConfirm}
+          closeModal={() => setOpenConfirm(false)}
+          root={myroot}
+          message={message}
+          confirm={handleConfirm}
+          isRemoving={isRemoving}
         />
       )}
       <ul className="settings__list">
