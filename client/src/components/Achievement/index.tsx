@@ -1,7 +1,8 @@
-import React from "react";
-import { ReactComponent as Cup } from "../../assets/cup.svg";
-import "./styles.scss";
+import React from 'react';
+import { ReactComponent as Cup } from '../../assets/cup.svg';
+import './styles.scss';
 interface IAchievement {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   bestResults: any;
   sign: string;
   countNumber: number;
@@ -18,9 +19,9 @@ export default function Achievement({
   React.useEffect(() => {
     if (bestResults !== undefined) {
       setBest(bestResults[`${sign}`][`${countNumber}`][`${level}`].result);
-    } else setBest("--");
+    } else setBest('--');
   }, [sign, bestResults, countNumber, level]);
-  const [best, setBest] = React.useState("--");
+  const [best, setBest] = React.useState('--');
   return (
     <section className="main__last-record">
       <div className="main__last-record-title">The best</div>

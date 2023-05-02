@@ -1,9 +1,9 @@
-import React from "react";
-import Counter from "../Counter";
-import { ReactComponent as Plus } from "../../assets/plus.svg";
-import { ReactComponent as Minus } from "../../assets/minus.svg";
-import { ReactComponent as Divide } from "../../assets/divide.svg";
-import { ReactComponent as Multiplied } from "../../assets/multiplied.svg";
+import React from 'react';
+import Counter from '../Counter';
+import { ReactComponent as Plus } from '../../assets/plus.svg';
+import { ReactComponent as Minus } from '../../assets/minus.svg';
+import { ReactComponent as Divide } from '../../assets/divide.svg';
+import { ReactComponent as Multiplied } from '../../assets/multiplied.svg';
 
 interface IStatusProps {
   count: number;
@@ -40,10 +40,10 @@ export default function Status({
         />
       </span>
       <div className="status__sign">
-        {sign === "+" ? plus : ""}
-        {sign === "-" ? minus : ""}
-        {sign === ":" ? divide : ""}
-        {sign === "*" ? multiplied : ""}
+        {sign === '+' ? plus : ''}
+        {sign === '-' ? minus : ''}
+        {sign === ':' ? divide : ''}
+        {sign === '*' ? multiplied : ''}
       </div>
       <span className="status__digit">
         <Counter

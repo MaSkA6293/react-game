@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 export const useAudio = (url: string) => {
   const [audio] = useState(new Audio(url));
 
   audio.addEventListener(
-    "ended",
+    'ended',
     function () {
       this.currentTime = 0;
       this.play();
     },
-    false
+    false,
   );
   const [playing, setPlaying] = useState(false);
 

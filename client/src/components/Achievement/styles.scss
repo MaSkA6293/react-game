@@ -1,26 +1,30 @@
-.main{
-    &__last-record-best{
-        position: absolute;
-        top: 30%;
-        left: auto;
-        font-size: 1.5rem;
-        font-weight: bold;
-        @media (max-width:  700px){
-            font-size: 1.3rem;
-        }
+.main {
+  &__last-record-best {
+    position: absolute;
+    top: 30%;
+    left: auto;
+    font-size: 1.5rem;
+    font-weight: bold;
+
+    @media (max-width: 700px) {
+      font-size: 1.3rem;
     }
-    &__last-record-sec{
-        position: absolute;
-        top: 40%;
-        left: auto;
-        font-size: 1.5rem;
-        font-weight: bold; 
-        @media (max-width:  700px){
-            font-size: 1.3rem;
-        }
+  }
+
+  &__last-record-sec {
+    position: absolute;
+    top: 40%;
+    left: auto;
+    font-size: 1.5rem;
+    font-weight: bold;
+
+    @media (max-width: 700px) {
+      font-size: 1.3rem;
     }
-    &__last-record-title{
-        font-size: 2rem;
-        font-weight: bold;
-    }
+  }
+
+  &__last-record-title {
+    font-size: 2rem;
+    font-weight: bold;
+  }
 }

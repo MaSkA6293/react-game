@@ -1,5 +1,5 @@
-import React from "react";
-import "./styles.scss";
+import React from 'react';
+import './styles.scss';
 
 interface ICounter {
   number: number | undefined;
@@ -27,7 +27,7 @@ export default function Counter({
       {digits.map((el, i) => {
         reverse ? (top += -50) : (top += 50);
         return (
-          <div key={i} className="counter__item" style={{ top: top + "px" }}>
+          <div key={i} className="counter__item" style={{ top: top + 'px' }}>
             {el}
           </div>
         );

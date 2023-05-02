@@ -1,21 +1,21 @@
-import { IStateGame } from "./reducers/game";
-import { IGlobalStore } from "./reducers/rootReducer";
-import { IsetBestResultsProps } from "./actionCreators";
-export const selectGameState = (state: IGlobalStore): IStateGame => state.game;
+import { StateGame } from './reducers/game';
+import { GlobalStore } from './reducers/rootReducer';
+import { SetBestResultsProps } from './actionCreators';
+export const selectGameState = (state: GlobalStore): StateGame => state.game;
 
-export const selectGameSign = (state: IGlobalStore): string =>
+export const selectGameSign = (state: GlobalStore): string =>
   selectGameState(state).sign;
-export const selectGameCount = (state: IGlobalStore): number =>
+export const selectGameCount = (state: GlobalStore): number =>
   selectGameState(state).count;
-export const selectGameStep = (state: IGlobalStore): number =>
+export const selectGameStep = (state: GlobalStore): number =>
   selectGameState(state).step;
-export const selectGameTimeUp = (state: IGlobalStore): number =>
+export const selectGameTimeUp = (state: GlobalStore): number =>
   selectGameState(state).timeUp;
-export const selectGameCountTasks = (state: IGlobalStore): number =>
+export const selectGameCountTasks = (state: GlobalStore): number =>
   selectGameState(state).countTasks;
 export const selectGameBestResults = (
-  state: IGlobalStore
-): IsetBestResultsProps | undefined => selectGameState(state).bestResults;
+  state: GlobalStore,
+): SetBestResultsProps | undefined => selectGameState(state).bestResults;
 
-export const selectGameLevel = (state: IGlobalStore): number =>
+export const selectGameLevel = (state: GlobalStore): number =>
   selectGameState(state).level;

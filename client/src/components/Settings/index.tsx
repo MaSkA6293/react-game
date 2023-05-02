@@ -1,45 +1,47 @@
-import React from "react";
-import { ReactComponent as SoundOn } from "../../assets/soundOn.svg";
-import { ReactComponent as SoundOff } from "../../assets/soundOff.svg";
-import { ReactComponent as RemoveResults } from "../../assets/remove_results.svg";
-import { ReactComponent as Rules } from "../../assets/rules.svg";
-import { setBestResults } from "../../actionCreators";
-import { useDispatch } from "react-redux";
-import CustomModal from "../CustomModal";
-import "./styles.scss";
-import ConfirmModal from "../ConfirmModal";
+import React from 'react';
+import { ReactComponent as SoundOn } from '../../assets/soundOn.svg';
+import { ReactComponent as SoundOff } from '../../assets/soundOff.svg';
+import { ReactComponent as RemoveResults } from '../../assets/remove_results.svg';
+import { ReactComponent as Rules } from '../../assets/rules.svg';
+import { setBestResults } from '../../actionCreators';
+import { useDispatch } from 'react-redux';
+import CustomModal from '../CustomModal';
+import './styles.scss';
+import ConfirmModal from '../ConfirmModal';
 interface ISettings {
   toggle: () => void;
   playing: boolean;
-  myroot: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  myRoot: any;
 }
 export default function Settings({
   playing,
   toggle,
-  myroot,
+  myRoot,
 }: ISettings): React.ReactElement {
   const [open, setOpen] = React.useState(false);
   const [openConfirm, setOpenConfirm] = React.useState(false);
   const [isRemoving, setIsRemoving] = React.useState(false);
-  const [message, setMessage] = React.useState("");
+  const [message, setMessage] = React.useState('');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [child, setChild] = React.useState<any>();
-  const [closeMessage, setCloseMessage] = React.useState("");
+  const [closeMessage, setCloseMessage] = React.useState('');
   const dispatch = useDispatch();
 
   const handleRemove = (e: React.MouseEvent<HTMLLIElement>) => {
     e.preventDefault();
-    setMessage("Do you really want to remove all the best results?");
+    setMessage('Do you really want to remove all the best results?');
     setOpenConfirm(true);
   };
   const handleConfirm = () => {
     setIsRemoving(true);
-    if (localStorage.getItem("results") !== undefined) {
-      localStorage.setItem("results", "");
+    if (localStorage.getItem('results') !== undefined) {
+      localStorage.setItem('results', '');
       dispatch(setBestResults(undefined));
     }
-    setMessage("Removing...");
+    setMessage('Removing...');
     setTimeout(() => {
-      setMessage("The results was successfully removed");
+      setMessage('The results was successfully removed');
       setTimeout(() => {
         setOpenConfirm(false);
         setIsRemoving(false);
@@ -48,9 +50,9 @@ export default function Settings({
   };
   const handleShowRules = () => {
     setOpen(true);
-    setMessage("");
+    setMessage('');
     setChild(textRule());
-    setCloseMessage("Ok");
+    setCloseMessage('Ok');
     setOpen(true);
   };
   const closeModal = () => {
@@ -61,7 +63,7 @@ export default function Settings({
       <div className="settings__rules">
         <h2 className="settings__title">Rules</h2>
         <p className="settings__text">
-          {" "}
+          {' '}
           You need to sort out the task on the scoreboard above and choose the
           correct answer
         </p>
@@ -70,11 +72,11 @@ export default function Settings({
   };
   return (
     <div className="settings">
-      {myroot.current && (
+      {myRoot.current && (
         <CustomModal
           isOpen={open}
           closeModal={closeModal}
-          root={myroot}
+          root={myRoot}
           tryAgain={undefined}
           message={message}
           child={child}
@@ -82,11 +84,11 @@ export default function Settings({
           closeMessage={closeMessage}
         />
       )}
-      {myroot.current && (
+      {myRoot.current && (
         <ConfirmModal
           isOpen={openConfirm}
           closeModal={() => setOpenConfirm(false)}
-          root={myroot}
+          root={myRoot}
           message={message}
           confirm={handleConfirm}
           isRemoving={isRemoving}

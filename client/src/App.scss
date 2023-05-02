@@ -1,17 +1,17 @@
-
-.app{
-    max-width: 100%;
-    min-width: 500px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background: linear-gradient(0deg, #98ee99, #b8f7bb);
+.app {
+  max-width: 100%;
+  min-width: 500px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(0deg, #98ee99, #b8f7bb);
 }
-.contaner{
-    display: flex;
-    width: 90%;
-    max-width: 900px;
-    margin: auto;
-    align-items: center;
-    justify-content: space-around;
+
+.container {
+  display: flex;
+  width: 90%;
+  max-width: 900px;
+  margin: auto;
+  align-items: center;
+  justify-content: space-around;
 }

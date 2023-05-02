@@ -1,7 +1,6 @@
-import React from "react";
-import "./styles.scss";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import {
   selectGameSign,
   selectGameStep,
@@ -9,53 +8,34 @@ import {
   selectGameCountTasks,
   selectGameCount,
   selectGameLevel,
-} from "../../selectors";
-import Bord from "../Bord";
-import Counter from "../Counter";
-import { getSuffleArr } from "../../utils/getSuffleArr";
-import CustomModal from "../CustomModal";
-import { useHistory } from "react-router-dom";
-import { ReactComponent as GetBack } from "../../assets/getBack.svg";
-import Timer from "../Timer";
-import { saveResultToStorage } from "../../utils/saveResultToStorage";
-import { getResult } from "../../utils/getResult";
-import { getExpressionItems } from "../../utils/getExpressionItems";
-export default function Game({ myroot }: any): React.ReactElement {
+} from '../../selectors';
+import Board from '../Board';
+import Counter from '../Counter';
+import { getShuffledArr } from '../../utils/getShuffledArr';
+import CustomModal from '../CustomModal';
+import { useNavigate } from 'react-router-dom';
+import { ReactComponent as GetBack } from '../../assets/getBack.svg';
+import Timer from '../Timer';
+import { saveResultToStorage } from '../../utils/saveResultToStorage';
+import { getResult } from '../../utils/getResult';
+import { getExpressionItems } from '../../utils/getExpressionItems';
+import './styles.scss';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function Game({ myRoot }: { myRoot: any }): React.ReactElement {
   const step = useSelector(selectGameStep);
+  const countTasks = useSelector(selectGameCountTasks);
+  const countNumber = useSelector(selectGameCount);
+  const timeUp = useSelector(selectGameTimeUp);
+  const level = useSelector(selectGameLevel);
+  const sign = useSelector(selectGameSign);
 
-  const countTasks = localStorage.getItem("levelSet")
-    ? JSON.parse(localStorage.getItem("levelSet")!).countTasks
-    : useSelector(selectGameCountTasks);
-  const countNumber = localStorage.getItem("countNumbers")
-    ? +localStorage.getItem("countNumbers")!
-    : useSelector(selectGameCount);
-  const timeUp = localStorage.getItem("levelSet")
-    ? JSON.parse(localStorage.getItem("levelSet")!).timeUp * countNumber
-    : useSelector(selectGameTimeUp);
-  const level =
-    localStorage.getItem("levelComplexity") !== null
-      ? +localStorage.getItem("levelComplexity")!
-      : useSelector(selectGameLevel);
+  const [restart, setRestart] = useState<boolean>(false);
 
-  React.useEffect(() => {
-    const [a, b] = getExpressionItems(countTasks, sign!, countNumber!);
-    const result = getResult(a, b, sign!);
-    setLefArr(a);
-    setRightArr(b);
-    setResultArr(result);
-    const board = Array(48 - result.length)
-      .fill(undefined)
-      .concat(result);
-    setBord(getSuffleArr(board));
-    setTimeStart(new Date().getTime());
-    setTimeFinish(new Date().getTime() + timeUp);
-  }, []);
-
-  const [restart, setRestart] = React.useState<boolean>(false);
-  React.useEffect(() => {
+  useEffect(() => {
     setIsOpen(false);
-    const [a, b] = getExpressionItems(countTasks, sign!, countNumber!);
-    const result = getResult(a, b, sign!);
+    const [a, b] = getExpressionItems(countTasks, sign, countNumber);
+    const result = getResult(a, b, sign);
     setLefArr(a);
     setRightArr(b);
     setResultArr(result);
@@ -63,14 +43,14 @@ export default function Game({ myroot }: any): React.ReactElement {
     const board = Array(48 - result.length)
       .fill(undefined)
       .concat(result);
-    setBord(getSuffleArr(board));
+    setBoard(getShuffledArr(board));
     setTimeStart(new Date().getTime());
     setTimeFinish(new Date().getTime() + timeUp);
     setTimerStop(false);
-  }, [restart]);
+  }, [restart, countNumber, countTasks, sign, timeUp]);
 
   const ranOutOfTime = () => {
-    setMessage("You lose... You should try again!");
+    setMessage('You lose... You should try again!');
     openModal();
   };
   const stopTimer = () => {
@@ -79,25 +59,22 @@ export default function Game({ myroot }: any): React.ReactElement {
   const [timerStop, setTimerStop] = React.useState<boolean>(false);
   const [timeFinish, setTimeFinish] = React.useState<number>(0);
   const [timeStart, setTimeStart] = React.useState<number>(0);
-  const [bord, setBord] = React.useState<(number | undefined)[]>([]);
+  const [board, setBoard] = React.useState<(number | undefined)[]>([]);
   const [leftArr, setLefArr] = React.useState<number[]>([]);
   const [rightArr, setRightArr] = React.useState<number[]>([]);
   const [resultArr, setResultArr] = React.useState<number[]>([]);
   const [indexResultArr, setIndexResultArr] = React.useState(0);
   const [modalIsOpen, setIsOpen] = React.useState(false);
-  const [message, setMessage] = React.useState("");
+  const [message, setMessage] = React.useState('');
 
-  const sign = localStorage.getItem("sign")
-    ? localStorage.getItem("sign")
-    : useSelector(selectGameSign);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   function openModal() {
     setIsOpen(true);
   }
 
   function closeModal() {
-    history.push("/");
+    navigate('/');
   }
   function tryAgain() {
     setRestart((prev) => !prev);
@@ -105,11 +82,11 @@ export default function Game({ myroot }: any): React.ReactElement {
 
   const renderCurrentExpression = (
     n: number,
-    reverse = false
+    reverse = false,
   ): React.ReactElement => {
     const str = n
       .toString()
-      .split("")
+      .split('')
       .map((el) => parseInt(el));
     let resultArr = [];
     if (str.length === 1) {
@@ -130,11 +107,9 @@ export default function Game({ myroot }: any): React.ReactElement {
     }
     return (
       <div className="current-expression__block">
-        {resultArr.map(
-          (el, i): React.ReactElement => {
-            return <Counter key={i} number={el} reverse={reverse} />;
-          }
-        )}
+        {resultArr.map((el, i): React.ReactElement => {
+          return <Counter key={i} number={el} reverse={reverse} />;
+        })}
       </div>
     );
   };
@@ -145,26 +120,26 @@ export default function Game({ myroot }: any): React.ReactElement {
       if (parseInt(value) === resultArr[indexResultArr]) {
         if (indexResultArr < resultArr.length - 1) {
           setIndexResultArr((prev) => prev + 1);
-          const newBoard = bord.map((el: number | undefined, index: number) =>
-            index === i ? undefined : el
+          const newBoard = board.map((el: number | undefined, index: number) =>
+            index === i ? undefined : el,
           );
-          setBord(newBoard);
+          setBoard(newBoard);
         } else {
-          const newBoard = bord.map((el: number | undefined, index: number) =>
-            index === i ? undefined : el
+          const newBoard = board.map((el: number | undefined, index: number) =>
+            index === i ? undefined : el,
           );
-          setBord(newBoard);
-          setMessage("Congratulations! You win!");
+          setBoard(newBoard);
+          setMessage('Congratulations! You win!');
           stopTimer();
           const record = +((new Date().getTime() - timeStart) / 1000).toFixed(
-            2
+            2,
           );
           openModal();
 
-          saveResultToStorage(record, sign!, countNumber!, level);
+          saveResultToStorage(record, sign, countNumber, level);
         }
       } else {
-        setMessage("You lose... You should try again!");
+        setMessage('You lose... You should try again!');
         stopTimer();
         openModal();
       }
@@ -172,20 +147,20 @@ export default function Game({ myroot }: any): React.ReactElement {
   };
   return (
     <div className="game">
-      {myroot.current && (
+      {myRoot.current && (
         <CustomModal
           isOpen={modalIsOpen}
           closeModal={closeModal}
           message={message}
           tryAgain={tryAgain}
-          root={myroot}
+          root={myRoot}
           child={undefined}
           closeShow={true}
-          closeMessage={"Close"}
+          closeMessage={'Close'}
         />
       )}
 
-      <div className="game__contaner">
+      <div className="game__container">
         <Link to="/" className="game__get-back">
           <GetBack width="40px" height="40px" />
         </Link>
@@ -201,16 +176,16 @@ export default function Game({ myroot }: any): React.ReactElement {
 
         <section className="game__current-expression current-expression">
           {renderCurrentExpression(
-            leftArr.length ? leftArr[indexResultArr] : 0
+            leftArr.length ? leftArr[indexResultArr] : 0,
           )}
           <div className="current-expression__sign">{sign}</div>
           {renderCurrentExpression(
             rightArr.length ? rightArr[indexResultArr] : 0,
-            true
+            true,
           )}
         </section>
 
-        <Bord bord={bord} handlerClick={handlerClick} />
+        <Board board={board} handlerClick={handlerClick} />
       </div>
     </div>
   );

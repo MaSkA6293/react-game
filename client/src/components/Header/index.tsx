@@ -1,11 +1,15 @@
-import React from "react";
-import "./styles.scss";
-import { ReactComponent as FullScreen } from "../../assets/switch-to-full-screen-button.svg";
+import React from 'react';
+import { ReactComponent as FullScreen } from '../../assets/switch-to-full-screen-button.svg';
+import './styles.scss';
 
-export default function Header({ handle }: any): React.ReactElement {
+export default function Header({
+  handle,
+}: {
+  handle: () => void;
+}): React.ReactElement {
   return (
     <header className="header">
-      <div className="contaner">
+      <div className="container">
         <h1 className="header__title">Quick count</h1>
         <button
           className="header__full-screen"

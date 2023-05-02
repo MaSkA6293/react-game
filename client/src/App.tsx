@@ -1,35 +1,37 @@
-import React from "react";
-import "./App.scss";
-import { Footer } from "./components/Footer";
-import Main from "./components/Main";
-import Header from "./components/Header";
-import Game from "./components/Game";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useAudio } from "./hooks/useAudio";
-import mainMusic from "./assets/mainMusic.mp3";
-import ErrorBoundary from "./components/ErrorBoundary";
+import React from 'react';
+import { Footer } from './components/Footer';
+import Main from './components/Main';
+import Header from './components/Header';
+import Game from './components/Game';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useAudio } from './hooks/useAudio';
+import mainMusic from './assets/mainMusic.mp3';
+import ErrorBoundary from './components/ErrorBoundary';
+import './App.scss';
+
 function App(): React.ReactElement {
   const handleFullScreen = () => {
     document.documentElement.requestFullscreen();
   };
-  const myroot = React.useRef(null);
+  const myRoot = React.useRef(null);
   const [playing, toggle] = useAudio(mainMusic);
   return (
     <ErrorBoundary>
-      <Router>
-        <div className="app" ref={myroot}>
+      <BrowserRouter>
+        <div className="app" ref={myRoot}>
           <Header handle={handleFullScreen} />
-          <Switch>
-            <Route path="/" exact>
-              <Main playing={playing} toggle={toggle} myroot={myroot} />
-            </Route>
-            <Route path="/game">
-              <Game myroot={myroot} />
-            </Route>
-          </Switch>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Main playing={playing} toggle={toggle} myRoot={myRoot} />
+              }
+            ></Route>
+            <Route path="/game" element={<Game myRoot={myRoot} />}></Route>
+          </Routes>
           <Footer />
         </div>
-      </Router>
+      </BrowserRouter>
     </ErrorBoundary>
   );
 }

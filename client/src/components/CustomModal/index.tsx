@@ -1,12 +1,15 @@
-import React, { ReactElement } from "react";
-import Modal from "react-modal";
-import "./styles.scss";
+import React from 'react';
+import Modal from 'react-modal';
+import './styles.scss';
+
 interface ICustomModal {
   isOpen: boolean;
   closeModal: () => void;
   message: string | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   child: any;
   tryAgain: (() => void) | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   root: any;
   closeShow: boolean;
   closeMessage: string;
@@ -24,21 +27,21 @@ export default function CustomModal({
 }: ICustomModal): React.ReactElement {
   const customStyles = {
     content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-      background: "#97ed98",
-      minWidth: "400px",
-      maxWidth: "500px",
-      borderRadius: "15px",
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      background: '#97ed98',
+      minWidth: '400px',
+      maxWidth: '500px',
+      borderRadius: '15px',
     },
   };
   return (
     <Modal
-      appElement={document.getElementById("root") as HTMLElement}
+      appElement={document.getElementById('root') as HTMLElement}
       isOpen={isOpen}
       onRequestClose={closeModal}
       style={customStyles}

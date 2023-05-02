@@ -1,18 +1,20 @@
-import produce from "immer";
-import { GameActionsTypes } from "../actionCreators/index";
-import { GameActionsType } from "../constants";
-import { IsetBestResultsProps } from "../actionCreators";
-export interface IStateGame {
+import produce from 'immer';
+import { GameActionsTypes } from '../actionCreators/index';
+import { GameActionsType } from '../constants';
+import { SetBestResultsProps } from '../actionCreators';
+
+export interface StateGame {
   sign: string;
   count: number;
   step: number;
   timeUp: number;
   countTasks: number;
-  bestResults: IsetBestResultsProps | undefined;
+  bestResults: SetBestResultsProps | undefined;
   level: number;
 }
-const initialState: IStateGame = {
-  sign: "+",
+
+const initialState: StateGame = {
+  sign: '+',
   count: 1,
   step: 1000,
   timeUp: 15 * 1000,
@@ -22,9 +24,9 @@ const initialState: IStateGame = {
 };
 
 const game = (
-  state: IStateGame = initialState,
-  action: GameActionsTypes
-): IStateGame => {
+  state: StateGame = initialState,
+  action: GameActionsTypes,
+): StateGame => {
   return produce(state, (draft) => {
     switch (action.type) {
       case GameActionsType.SET_SIGN:
@@ -42,7 +44,7 @@ const game = (
         draft.level = action.payload.level;
         break;
       default:
-        state;
+        return state;
     }
   });
 };

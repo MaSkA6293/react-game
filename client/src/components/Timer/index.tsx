@@ -1,7 +1,7 @@
-import React from "react";
-import "./styles.scss";
+import React from 'react';
+import './styles.scss';
 
-interface ITimer {
+interface Timer {
   step: number;
   ranOutOfTime: () => void;
   stop: boolean;
@@ -16,7 +16,7 @@ export default function Timer({
   finish,
   ranOutOfTime,
   restart,
-}: ITimer): React.ReactElement {
+}: Timer): React.ReactElement {
   const difference = finish - start;
   const stepTimer = (step * 100) / difference;
   React.useEffect(() => {
@@ -44,7 +44,7 @@ export default function Timer({
       <div className="timer__body">
         <div
           className="timer__progress"
-          style={{ width: progress + "%" }}
+          style={{ width: progress + '%' }}
         ></div>
       </div>
     </section>

@@ -1,11 +1,12 @@
-import React from "react";
-import Modal from "react-modal";
+import React from 'react';
+import Modal from 'react-modal';
 
 interface ICustomModal {
   isOpen: boolean;
   closeModal: () => void;
   confirm: () => void;
   message: string | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   root: any;
   isRemoving: boolean;
 }
@@ -20,21 +21,21 @@ export default function ConfirmModal({
 }: ICustomModal): React.ReactElement {
   const customStyles = {
     content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-      background: "#97ed98",
-      minWidth: "400px",
-      maxWidth: "500px",
-      borderRadius: "15px",
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      background: '#97ed98',
+      minWidth: '400px',
+      maxWidth: '500px',
+      borderRadius: '15px',
     },
   };
   return (
     <Modal
-      appElement={document.getElementById("root") as HTMLElement}
+      appElement={document.getElementById('root') as HTMLElement}
       isOpen={isOpen}
       onRequestClose={closeModal}
       style={customStyles}

@@ -1,8 +1,10 @@
-import { combineReducers } from "redux";
-import game from "../reducers/game";
-import { IStateGame } from "../reducers/game";
-export interface IGlobalStore {
-  game: IStateGame;
+import { combineReducers } from 'redux';
+import game from './game';
+import { StateGame } from './game';
+
+export interface GlobalStore {
+  game: StateGame;
 }
-const rootReducer = combineReducers<IGlobalStore>({ game });
+
+const rootReducer = combineReducers<GlobalStore>({ game });
 export default rootReducer;
