@@ -34,6 +34,7 @@ export default function Complexity(): React.ReactElement {
         <li
           className={classNames(
             'complexity__list-item',
+            'complexity__list-item-easy',
             levelComplexity === 1 ? 'complexity__list-item-active' : '',
           )}
           data-level="1"
@@ -44,6 +45,7 @@ export default function Complexity(): React.ReactElement {
         <li
           className={classNames(
             'complexity__list-item',
+            'complexity__list-item-medium',
             levelComplexity === 2 ? 'complexity__list-item-active' : '',
           )}
           data-level="2"
@@ -54,6 +56,7 @@ export default function Complexity(): React.ReactElement {
         <li
           className={classNames(
             'complexity__list-item',
+            'complexity__list-item-hard',
             levelComplexity === 3 ? 'complexity__list-item-active' : '',
           )}
           data-level="3"

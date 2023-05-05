@@ -1,0 +1,42 @@
+.play-game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  &__start {
+    display: flex;
+    position: relative;
+    width: 200px;
+    height: 50px;
+    background-color: #97d09e;
+    border-radius: 7px;
+    font-size: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+
+    &:hover {
+      cursor: pointer;
+      background-color: var(--font-color-light);
+      animation: hover infinite 0.5s;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__start-link {
+    text-decoration: none;
+  }
+}
+
+@keyframes hover {
+  0% {
+    top: 0px;
+  }
+
+  100% {
+    top: -2px;
+  }
+}

@@ -62,10 +62,11 @@ export default function Main({
     <div className="main">
       <div className="container">
         <div className="main__container">
-          <Status count={count} sign={sign} />
           <section className="main__settings">
             <Settings toggle={toggle} playing={playing} myRoot={myRoot} />
           </section>
+          <Status count={count} sign={sign} />
+
           <section className="main__set-up-game">
             <Sign sign={sign} />
             <Achievement

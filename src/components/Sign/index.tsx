@@ -40,7 +40,7 @@ export default function Sign({ sign }: { sign: string }): React.ReactElement {
     <section className="main__choice-of-sign choice-of-sign">
       <h2 className="choice-of-sign__title">Select sign</h2>
       <div className="choice-of-sign__marker">
-        <ArrowDown fill="black" width="40px" height="40px" />
+        <ArrowDown fill="#1f441e" width="40px" height="40px" />
       </div>
       <div
         className="choice-of-sign__select-sign"
@@ -52,7 +52,7 @@ export default function Sign({ sign }: { sign: string }): React.ReactElement {
             className="choice-of-sign__btn"
             value="+"
           >
-            <Plus fill="black" width="40px" height="40px" />
+            <Plus fill="#1f441e" width="25px" height="25px" />
           </button>
         </div>
         <div className="choice-of-sign__sign">
@@ -62,7 +62,7 @@ export default function Sign({ sign }: { sign: string }): React.ReactElement {
             className="choice-of-sign__btn"
             value="-"
           >
-            <Minus fill="black" width="40px" height="40px" />
+            <Minus fill="#1f441e" width="25px" height="25px" />
           </button>
         </div>
         <div className="choice-of-sign__sign">
@@ -72,7 +72,7 @@ export default function Sign({ sign }: { sign: string }): React.ReactElement {
             className="choice-of-sign__btn"
             value=":"
           >
-            <Divide fill="black" width="40px" height="40px" />
+            <Divide fill="#1f441e" width="25px" height="25px" />
           </button>
         </div>
         <div className="choice-of-sign__sign">
@@ -82,7 +82,7 @@ export default function Sign({ sign }: { sign: string }): React.ReactElement {
             className="choice-of-sign__btn"
             value="*"
           >
-            <Multiplied fill="black" width="40px" height="40px" />
+            <Multiplied fill="#1f441e" width="23px" height="23px" />
           </button>
         </div>
       </div>

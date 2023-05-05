@@ -17,7 +17,7 @@ export default function Status({
   const plus = <Plus fill="black" width="100%" height="100%" />;
   const minus = <Minus fill="black" width="100%" height="100%" />;
   const divide = <Divide fill="black" width="100%" height="100%" />;
-  const multiplied = <Multiplied fill="black" width="100%" height="100%" />;
+  const multiplied = <Multiplied fill="black" width="70%" height="70%" />;
   return (
     <section className="main__selected-status status">
       <span className="status__digit">

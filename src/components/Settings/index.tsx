@@ -96,13 +96,17 @@ export default function Settings({
       )}
       <ul className="settings__list">
         <li className="settings__list-item" onClick={toggle}>
-          {playing ? <SoundOn /> : <SoundOff />}
+          {playing ? (
+            <SoundOn width="80%" height="80%" />
+          ) : (
+            <SoundOff width="80%" height="80%" />
+          )}
         </li>
         <li className="settings__list-item" onClick={handleRemove}>
-          <RemoveResults width="100%" height="100%" />
+          <RemoveResults width="80%" height="80%" />
         </li>
         <li className="settings__list-item" onClick={handleShowRules}>
-          <Rules width="100%" height="100%" />
+          <Rules width="80%" height="80%" />
         </li>
       </ul>
     </div>
