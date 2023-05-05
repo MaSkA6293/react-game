@@ -1,13 +1,22 @@
 .game {
   width: 100%;
-  padding-bottom: 30px;
   flex: 1;
 
   &__get-back {
     position: absolute;
     right: 8px;
     top: 87px;
+    width: 40px;
+    height: 40px;
+
+    @media (max-width: 600px) {
+      right: 2px;
+      top: 87px;
+      width: 25px;
+      height: 25px;
+    }
   }
+
   .current-expression {
     display: flex;
     justify-content: center;
@@ -25,15 +34,23 @@
       font-size: 2rem;
       padding: 0 10px;
     }
+
+    @media (max-width: 600px) {
+      justify-content: start;
+    }
   }
 
   &__container {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    max-width: 500px;
+    width: 500px;
     margin: auto;
     position: relative;
+
+    @media (max-width: 600px) {
+      width: 310px;
+      margin: 0 auto;
+    }
   }
 
   &__board {
@@ -41,6 +58,9 @@
     flex-wrap: wrap;
     width: 500px;
     margin: auto;
+    @media (max-width: 600px) {
+      width: 310px;
+    }
   }
 
   &__board-item {
@@ -55,11 +75,17 @@
     font-size: 2.2rem;
     font-weight: bold;
     transition: all 0.3s ease-in-out;
+
+    @media (max-width: 600px) {
+      width: 36px;
+      height: 36px;
+      font-size: 1.6rem;
+    }
   }
 
   &__board-item-active {
     &:hover {
-      font-size: 2.5rem;
+      scale: 1.05;
       cursor: pointer;
       background-color: #66bb6a;
     }

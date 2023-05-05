@@ -161,9 +161,11 @@ export default function Game({ myRoot }: { myRoot: any }): React.ReactElement {
       )}
 
       <div className="game__container">
-        <Link to="/" className="game__get-back">
-          <GetBack width="40px" height="40px" />
-        </Link>
+        <div className="game__get-back">
+          <Link to="/">
+            <GetBack width="100%" height="100%" />
+          </Link>
+        </div>
 
         <Timer
           step={step}
