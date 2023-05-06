@@ -1,0 +1,107 @@
+.game {
+  width: 100%;
+  flex: 1;
+
+  &__get-back {
+    position: absolute;
+    right: 8px;
+    top: 87px;
+    width: 40px;
+    height: 40px;
+
+    @media (max-width: 600px) {
+      right: 2px;
+      top: 87px;
+      width: 25px;
+      height: 25px;
+    }
+  }
+
+  .current-expression {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+
+    &__block {
+      display: flex;
+      justify-content: center;
+    }
+
+    &__sign {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      padding: 0 10px;
+    }
+
+    @media (max-width: 600px) {
+      justify-content: start;
+    }
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    margin: auto;
+    position: relative;
+
+    @media (max-width: 600px) {
+      width: 310px;
+      margin: 0 auto;
+    }
+  }
+
+  &__board {
+    display: flex;
+    flex-wrap: wrap;
+    width: 500px;
+    margin: auto;
+    @media (max-width: 600px) {
+      width: 310px;
+    }
+  }
+
+  &__board-item {
+    width: 60px;
+    height: 60px;
+    background-color: #98ee99;
+    border: 1px solid;
+    border-radius: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.2rem;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+
+    @media (max-width: 600px) {
+      width: 36px;
+      height: 36px;
+      font-size: 1.6rem;
+    }
+  }
+
+  &__board-item-active {
+    &:hover {
+      scale: 1.05;
+      cursor: pointer;
+      background-color: #66bb6a;
+    }
+  }
+
+  &__board-item-text-md {
+    font-size: 1.5rem;
+    &:hover {
+      font-size: 1.5rem;
+    }
+  }
+
+  &__board-item-text-sm {
+    font-size: 1rem;
+    &:hover {
+      font-size: 1rem;
+    }
+  }
+}

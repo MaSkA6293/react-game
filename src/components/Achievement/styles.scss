@@ -1,0 +1,43 @@
+.main {
+  &__last-record-best {
+    position: absolute;
+    top: 115px;
+    left: auto;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--font-color-dark);
+
+    @media (max-width: 750px) {
+      top: 70px;
+    }
+  }
+
+  &__last-record-sec {
+    position: absolute;
+    top: 135px;
+    left: auto;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--font-color-dark);
+
+    @media (max-width: 750px) {
+      top: 90px;
+    }
+  }
+
+  &__last-record-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--font-color-dark);
+  }
+
+  &__last-record-cup {
+    width: 180px;
+    height: 100%;
+
+    @media (max-width: 750px) {
+      height: 180px;
+      padding-bottom: 15px;
+    }
+  }
+}
