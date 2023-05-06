@@ -16,7 +16,7 @@ export interface StateGame {
 const initialState: StateGame = {
   sign: '+',
   count: 1,
-  step: 10,
+  step: 100,
   timeUp: 15 * 1000,
   countTasks: 3,
   bestResults: undefined,
