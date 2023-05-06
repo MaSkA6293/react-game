@@ -2,8 +2,13 @@
 
 _React course 2011_
 
-1. clone the repository
-2. install to install the all necessary dependencies use
+1. Clone the repository
+
+```
+git clone https://github.com/MaSkA6293/react-game.git
+```
+
+2. To install the all necessary dependencies use
 
 ```
 npm install
