@@ -10,16 +10,13 @@ import ErrorBoundary from './components/ErrorBoundary';
 import './App.scss';
 
 function App(): React.ReactElement {
-  const handleFullScreen = () => {
-    document.documentElement.requestFullscreen();
-  };
   const myRoot = React.useRef(null);
   const [playing, toggle] = useAudio(mainMusic);
   return (
     <ErrorBoundary>
       <BrowserRouter>
         <div className="app" ref={myRoot}>
-          <Header handle={handleFullScreen} />
+          <Header />
           <Routes>
             <Route
               path="/"

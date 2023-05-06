@@ -1,12 +1,20 @@
-import React from 'react';
-import { ReactComponent as FullScreen } from '../../assets/switch-to-full-screen-button.svg';
+import React, { useState } from 'react';
+import { ReactComponent as FullScreenOn } from '../../assets/full-screen-on.svg';
+import { ReactComponent as FullScreenOff } from '../../assets/full-screen-off.svg';
 import './styles.scss';
 
-export default function Header({
-  handle,
-}: {
-  handle: () => void;
-}): React.ReactElement {
+export default function Header(): React.ReactElement {
+  const [isFullScreen, setIsFullScreen] = useState<boolean>(false);
+
+  const handleClick = () => {
+    setIsFullScreen(!isFullScreen);
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  };
+
   return (
     <header className="header">
       <div className="container">
@@ -14,15 +22,23 @@ export default function Header({
         <button
           className="header__full-screen"
           title="Full screen"
-          onClick={handle}
+          onClick={handleClick}
         >
-          <h3 className="header__button-title">Full screen</h3>
-          <FullScreen
-            className="header__full-screen-image"
-            fill="black"
-            width="20px"
-            height="20px"
-          />
+          {isFullScreen ? (
+            <FullScreenOff
+              className="header__full-screen-image"
+              fill="black"
+              width="20px"
+              height="20px"
+            />
+          ) : (
+            <FullScreenOn
+              className="header__full-screen-image"
+              fill="black"
+              width="20px"
+              height="20px"
+            />
+          )}
         </button>
       </div>
     </header>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal';
+import './styles.scss';
 
 interface ICustomModal {
   isOpen: boolean;
@@ -28,9 +29,10 @@ export default function ConfirmModal({
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
       background: '#97ed98',
-      minWidth: '400px',
+      minWidth: '240px',
       maxWidth: '500px',
-      borderRadius: '15px',
+      borderRadius: '10px',
+      width: '80%',
     },
   };
   return (

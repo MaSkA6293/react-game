@@ -34,9 +34,10 @@ export default function CustomModal({
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
       background: '#97ed98',
-      minWidth: '260px',
+      minWidth: '250px',
       maxWidth: '500px',
-      borderRadius: '15px',
+      borderRadius: '10px',
+      width: '80%',
     },
   };
   return (

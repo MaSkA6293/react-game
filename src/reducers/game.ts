@@ -17,7 +17,7 @@ const initialState: StateGame = {
   sign: '+',
   count: 1,
   step: 10,
-  timeUp: 1500 * 1000,
+  timeUp: 15 * 1000,
   countTasks: 3,
   bestResults: undefined,
   level: 1,
